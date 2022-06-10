@@ -26,11 +26,11 @@ AuthorSchema
 	});
 
 AuthorSchema
-.virtual('years_formatted')
+.virtual('lifespan')
 .get(function () {
-	 let str = moment(this.date_of_birth).format('YYYY, MMMM Do') + ' - '; 
+	 let str = moment(this.date_of_birth).format('MMMM Do, YYYY') + ' - '; 
 	if (moment(this.date_of_death).isValid() ){
-		str += moment(this.date_of_death).format('YYYY, MMMM Do'); }
+		str += moment(this.date_of_death).format('MMMM Do, YYYY'); }
 	return str
 });
 	
