@@ -1,8 +1,15 @@
 var Author = require('../models/author');
 // Показать список всех авторов.
-exports.author_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author list');
-};
+exports.author_list = function(req, res, next) {
+    Author.find()
+        .sort([['family_name', 'ascending']])
+        .exec(function (err, list_authors) {
+			if (err) { return next(err); } //Successful, so render 
+			res.render('author_list', {
+            	title: 'Author List', author_list: list_authors
+           });
+}); };
+
 // Показать подробную страницу для данного автора.
 exports.author_detail = function(req, res) {
     res.send('NOT IMPLEMENTED: Author detail: ' + req.params.id);
